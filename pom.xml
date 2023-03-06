@@ -3,4 +3,28 @@
   <groupId>senac-dd-202301-louisi</groupId>
   <artifactId>senac-dd-202301-louisi</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-</project>
+  
+
+  <name>my-delivery</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+   
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.38</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.17</version>
+    </dependency>
+	
+  </dependencies>
+  </project.build.sourceEncodingn>
