@@ -27,8 +27,7 @@ public class TelefoneDAO {
 				
 			//executar o INSERT
 			try {
-				(query.setInt(1, novoTelefone.getIdCliente() == null) ? 0 : novoTelefone.getIdCliente();
-				
+				query.setInt(5, novoTelefone.getIdCliente() != null ? novoTelefone.getIdCliente() : 0);
 				query.setString(2, novoTelefone.getDdd());
 				query.setString(3, novoTelefone.getNumero());
 				query.setBoolean(4, novoTelefone.isAtivo());
