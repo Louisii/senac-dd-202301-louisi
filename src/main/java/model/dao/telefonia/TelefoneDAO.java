@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import main.java.model.dao.Banco;
+import main.java.model.vo.telefonia.Endereco;
 import main.java.model.vo.telefonia.Telefone;
 
 public class TelefoneDAO {
@@ -51,6 +52,38 @@ public class TelefoneDAO {
 			
 			return novoTelefone;
 		}
+		
+		
+		
+		public boolean atualizar(Telefone telefoneEditado) {
+			boolean atualizou = false;
+			Connection conexao = Banco.getConnection();
+			String sql = " UPDATE Telefone "
+					   + " SET DDD = ?, NUMERO = ?, ATIVO = ?, "
+					   + "     MOVEL = ?, ID_CLIENTE = ? "
+					   + " WHERE ID = ? ";
+			PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
+			try {
+				query.setString(1, telefoneEditado.getDdd());
+				query.setString(2, telefoneEditado.getNumero());
+				query.setBoolean(3, telefoneEditado.isAtivo());
+				query.setBoolean(4, telefoneEditado.isMovel());
+				query.setInt(5, telefoneEditado.getIdCliente() != null ? telefoneEditado.getIdCliente() : 0);
+				
+				
+				int quantidadeLinhasAtualizadas = query.executeUpdate();
+				atualizou = quantidadeLinhasAtualizadas > 0;
+			} catch (SQLException excecao) {
+				System.out.println("Erro ao atualizar endereço. "
+						+ "\n Causa: " + excecao.getMessage());
+			}finally {
+				Banco.closePreparedStatement(query);
+				Banco.closeConnection(conexao);
+			}
+			
+			return atualizou;
+		}
+		
 		
 		
 }
