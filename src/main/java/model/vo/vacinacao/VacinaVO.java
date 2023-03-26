@@ -84,8 +84,8 @@ public class VacinaVO {
 
 	@Override
 	public String toString() {
-		return "VacinaVO [idVacina= " + idVacina + ", origem= " + origem + ", estagio= " + estagio + ", dtIniPesquisa= "
-				+ dtIniPesquisa + ", idPesquisadorResponsavel= " + idPesquisadorResponsavel + "]";
+		return "VacinaVO [idVacina= " + idVacina + ", nome= " + nome + ", origem= " + origem + ", estagio= " + estagio
+				+ ", dtIniPesquisa= " + dtIniPesquisa + ", idPesquisadorResponsavel= " + idPesquisadorResponsavel + "]";
 	}
 	
 	
