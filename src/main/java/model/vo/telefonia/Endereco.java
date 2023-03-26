@@ -1,4 +1,4 @@
-package main.java.model.vo.telefonia;
+package model.vo.telefonia;
 
 
 public class Endereco {
@@ -38,9 +38,9 @@ public class Endereco {
 		this.estado = estado;
 	}
 
-	//Métodos
+	//Mï¿½todos
 	
-	//Métodos getter e setters
+	//Mï¿½todos getter e setters
 	public Integer getId() {
 		return id;
 	}

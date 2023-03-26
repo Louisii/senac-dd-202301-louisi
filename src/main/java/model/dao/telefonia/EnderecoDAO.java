@@ -1,5 +1,5 @@
 
-package main.java.model.dao.telefonia;
+package model.dao.telefonia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,15 +8,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.model.dao.Banco;
-import main.java.model.vo.telefonia.Endereco;
+import model.dao.Banco;
+import model.vo.telefonia.Endereco;
 
 public class EnderecoDAO {
 
 	/**
 	 * Insere um novo endereco no banco
 	 * @param novoEndereco o endereco a ser persistido
-	 * @return o endereco inserido com a chave primária gerada
+	 * @return o endereco inserido com a chave primï¿½ria gerada
 	 */
 	public Endereco inserir(Endereco novoEndereco) {
 		//Conectar ao banco
@@ -44,10 +44,10 @@ public class EnderecoDAO {
 			}
 			
 		} catch (SQLException e) {
-			System.out.println("Erro ao inserir endereço. "
+			System.out.println("Erro ao inserir endereï¿½o. "
 					+ "\nCausa: " + e.getMessage());
 		}finally {
-			//Fechar a conexão
+			//Fechar a conexï¿½o
 			Banco.closePreparedStatement(query);
 			Banco.closeConnection(conexao);
 		}
@@ -75,7 +75,7 @@ public class EnderecoDAO {
 			int quantidadeLinhasAtualizadas = query.executeUpdate();
 			atualizou = quantidadeLinhasAtualizadas > 0;
 		} catch (SQLException excecao) {
-			System.out.println("Erro ao atualizar endereço. "
+			System.out.println("Erro ao atualizar endereï¿½o. "
 					+ "\n Causa: " + excecao.getMessage());
 		}finally {
 			Banco.closePreparedStatement(query);
@@ -100,7 +100,7 @@ public class EnderecoDAO {
 				enderecoConsultado = converterDeResultSetParaEntidade(resultado);
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao buscar endereço com id: + " + id 
+			System.out.println("Erro ao buscar endereï¿½o com id: + " + id 
 								+ "\n Causa: " + e.getMessage());	
 		}
 		
@@ -120,7 +120,7 @@ public class EnderecoDAO {
 			int quantidadeLinhasAtualizadas = query.executeUpdate();
 			excluiu = quantidadeLinhasAtualizadas > 0;
 		} catch (SQLException excecao) {
-			System.out.println("Erro ao excluir endereço. "
+			System.out.println("Erro ao excluir endereï¿½o. "
 					+ "\n Causa: " + excecao.getMessage());
 		}finally {
 			Banco.closePreparedStatement(query);
@@ -142,7 +142,7 @@ public class EnderecoDAO {
 				enderecos.add(enderecoConsultado);
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao buscar todos os endereços" 
+			System.out.println("Erro ao buscar todos os endereï¿½os" 
 								+ "\n Causa: " + e.getMessage());	
 		}
 		

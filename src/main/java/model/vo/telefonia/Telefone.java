@@ -1,4 +1,4 @@
-package main.java.model.vo.telefonia;
+package model.vo.telefonia;
 
 public class Telefone {
 	

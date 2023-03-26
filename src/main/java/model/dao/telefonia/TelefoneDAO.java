@@ -1,13 +1,12 @@
-package main.java.model.dao.telefonia;
+package model.dao.telefonia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import main.java.model.dao.Banco;
-import main.java.model.vo.telefonia.Endereco;
-import main.java.model.vo.telefonia.Telefone;
+import model.dao.Banco;
+import model.vo.telefonia.Telefone;
 
 public class TelefoneDAO {
 	//INSERT
@@ -17,7 +16,7 @@ public class TelefoneDAO {
 		/**
 		 * Insere um novo telefone no banco
 		 * @param novoTelefone o endereco a ser persistido
-		 * @return o telefone inserido com a chave primária gerada
+		 * @return o telefone inserido com a chave primï¿½ria gerada
 		 */
 		public Telefone inserir(Telefone novoTelefone) {
 			//Conectar ao banco
@@ -42,10 +41,10 @@ public class TelefoneDAO {
 				}
 				
 			} catch (SQLException e) {
-				System.out.println("Erro ao inserir endereço. "
+				System.out.println("Erro ao inserir endereï¿½o. "
 						+ "\nCausa: " + e.getMessage());
 			}finally {
-				//Fechar a conexão
+				//Fechar a conexï¿½o
 				Banco.closePreparedStatement(query);
 				Banco.closeConnection(conexao);
 			}
@@ -74,7 +73,7 @@ public class TelefoneDAO {
 				int quantidadeLinhasAtualizadas = query.executeUpdate();
 				atualizou = quantidadeLinhasAtualizadas > 0;
 			} catch (SQLException excecao) {
-				System.out.println("Erro ao atualizar endereço. "
+				System.out.println("Erro ao atualizar endereï¿½o. "
 						+ "\n Causa: " + excecao.getMessage());
 			}finally {
 				Banco.closePreparedStatement(query);

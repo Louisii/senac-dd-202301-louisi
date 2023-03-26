@@ -1,32 +1,32 @@
-package main.java.executavel;
+package executavel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.model.dao.telefonia.EnderecoDAO;
-import main.java.model.dao.telefonia.TelefoneDAO;
-import main.java.model.vo.telefonia.Cliente;
-import main.java.model.vo.telefonia.Endereco;
-import main.java.model.vo.telefonia.Telefone;
+import model.dao.telefonia.EnderecoDAO;
+import model.dao.telefonia.TelefoneDAO;
+import model.vo.telefonia.Cliente;
+import model.vo.telefonia.Endereco;
+import model.vo.telefonia.Telefone;
 
 public class ExecutavelTelefonia {
 
 	public static void main(String[] args) {
 		
-		Endereco endereco1 = new Endereco("88000123", "Nereu Ramos", "10", "Centro", "Florianópolis", "SC");
-		EnderecoDAO dbaDeEnderecos = new EnderecoDAO();
+		//Endereco endereco1 = new Endereco("88000123", "Nereu Ramos", "10", "Centro", "Florianï¿½polis", "SC");
+		//EnderecoDAO dbaDeEnderecos = new EnderecoDAO();
 		//dbaDeEnderecos.inserir(endereco1);
 		
-		if(dbaDeEnderecos.excluir(1)) {
-			System.out.println("Endereço foi excluído");
-		}else {
-			System.out.println("Erro ao excluir endereço");
-		}
+		//(dbaDeEnderecos.excluir(1)) {
+		//	System.out.println("Endereï¿½o foi excluï¿½do");
+		//}else {
+		//	System.out.println("Erro ao excluir endereï¿½o");
+		//}
 		
 		/*
 		 * if(endereco1.getId() != null) {
-		 * System.out.println("Novo endereço cadastrado"); }else {
-		 * System.out.println("Erro ao cadastrar endereço"); }
+		 * System.out.println("Novo endereï¿½o cadastrado"); }else {
+		 * System.out.println("Erro ao cadastrar endereï¿½o"); }
 		 */
 		
 //		Endereco enderecoQueJaExiste = dbaDeEnderecos.consultarPorId(2);
@@ -37,9 +37,9 @@ public class ExecutavelTelefonia {
 //		boolean atualizou = dbaDeEnderecos.atualizar(enderecoQueJaExiste);
 //		enderecoQueJaExiste = dbaDeEnderecos.consultarPorId(2);
 //		if(atualizou) {
-//			System.out.println("Endereço foi atualizado");
+//			System.out.println("Endereï¿½o foi atualizado");
 //		}else {
-//			System.out.println("Erro ao atualizar endereço");
+//			System.out.println("Erro ao atualizar endereï¿½o");
 //		}
 //		
 //		System.out.println(enderecoQueJaExiste);
@@ -51,7 +51,7 @@ public class ExecutavelTelefonia {
 //		telefonesDoSocrates.add(new Telefone("48", "98881234", true, true));
 //		
 //		Cliente pele = new Cliente("Edson Arantes", "11122233344", null, true, endereco1);
-//		Cliente socrates = new Cliente("Sócrates Brasileiro", "33322233344", telefonesDoSocrates, true, endereco1);
+//		Cliente socrates = new Cliente("Sï¿½crates Brasileiro", "33322233344", telefonesDoSocrates, true, endereco1);
 //		
 //		List<Cliente> clientes = new ArrayList<Cliente>();
 //		clientes.add(pele);
