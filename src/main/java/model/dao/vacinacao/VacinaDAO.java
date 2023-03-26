@@ -10,7 +10,7 @@ import model.vo.vacinacao.VacinaVO;
 
 public class VacinaDAO {
 	
-public VacinaVO inserir(VacinaVO novaVacina) {
+	public VacinaVO inserir(VacinaVO novaVacina) {
 	
 		Connection conexao = Banco.getConnection();
 		String sql =  " INSERT INTO VACINA (NOME, PAIS_DE_ORIGEM, ESTAGIO_DA_PESQUISA, DT_INICIO_PESQUISA, ID_PESQUISADOR_RESPONSAVEL) "
@@ -47,6 +47,37 @@ public VacinaVO inserir(VacinaVO novaVacina) {
 	}
 	
 	
-
+	public VacinaVO consultarPorId(int id_vacina) {
+		VacinaVO vacinaBuscada = null;
+		Connection conexao = Banco.getConnection();
+		String sql = " select * from vacinacao.vacina "
+				   + " where id_vacina = ? ";
+		
+		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
+		try {
+			query.setInt(1, id_vacina);
+			ResultSet resultado = query.executeQuery();
+			
+			if(resultado.next()) {
+				vacinaBuscada = new VacinaVO();
+				vacinaBuscada.setIdVacina(resultado.getInt("id_vacina"));
+				vacinaBuscada.setNome(resultado.getString("nome"));
+				vacinaBuscada.setOrigem(resultado.getString("PAIS_DE_ORIGEM"));
+				vacinaBuscada.setDtIniPesquisa(resultado.getString("ESTAGIO_DA_PESQUISA"));
+				vacinaBuscada.setDtIniPesquisa(resultado.getString("DT_INICIO_PESQUISA"));
+				vacinaBuscada.setIdPesquisadorResponsavel(resultado.getInt("ID_PESQUISADOR_RESPONSAVEL"));
+				
+			}
+			
+		}catch (Exception e) {
+			System.out.println("Erro ao buscar vacina com id: " + id_vacina 
+					+ "\n Causa:" + e.getMessage());
+		}finally {
+			Banco.closePreparedStatement(query);
+			Banco.closeConnection(conexao);
+		}
+		
+		return vacinaBuscada;
+	}
 
 }

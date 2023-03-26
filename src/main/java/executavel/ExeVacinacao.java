@@ -23,7 +23,9 @@ public class ExeVacinacao {
 		
 		VacinaVO v1 = new VacinaVO("covid", "Brasil", 2, "01-01-2020", 3 );
 		
-		System.out.println(vacinaDao.inserir(v1));
+		//System.out.println(vacinaDao.inserir(v1));
+		
+		System.out.println(vacinaDao.consultarPorId(1)); 
 		
 	}
 
