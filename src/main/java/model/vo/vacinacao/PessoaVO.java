@@ -84,8 +84,8 @@ public class PessoaVO {
 
 	@Override
 	public String toString() {
-		return "PessoaVO [idPessoa=" + idPessoa + ", nome=" + nome + ", dtNascimento=" + dtNascimento + ", sexo=" + sexo
-				+ ", cpf=" + cpf + ", tipo=" + tipo + "]";
+		return "PessoaVO [idPessoa= " + idPessoa + ", nome= " + nome + ", dtNascimento= " + dtNascimento + ", sexo= " + sexo
+				+ ", cpf= " + cpf + ", tipo= " + tipo + "]";
 	}
 	
 }
