@@ -24,6 +24,15 @@ public class PessoaVO {
 		this.cpf = cpf;
 		this.tipo = tipo;
 	}
+	
+	public PessoaVO(String nome, String dtNascimento, String sexo, String cpf, Integer tipo) {
+		super();
+		this.nome = nome;
+		this.dtNascimento = dtNascimento;
+		this.sexo = sexo;
+		this.cpf = cpf;
+		this.tipo = tipo;
+	}
 
 	public Integer getIdPessoa() {
 		return idPessoa;

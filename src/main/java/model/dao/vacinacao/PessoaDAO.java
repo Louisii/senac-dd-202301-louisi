@@ -3,13 +3,48 @@ package model.dao.vacinacao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import model.dao.Banco;
 import model.vo.vacinacao.PessoaVO;
 
 public class PessoaDAO {
 
-	
+	public PessoaVO inserir(PessoaVO novaPessoa) {
+		
+		Connection conexao = Banco.getConnection();
+		String sql =  " INSERT INTO PESSOA (NOME, DT_NASCIMENTO, SEXO, CPF, TIPO) "
+				    + " VALUES (?,?,?,?,?) ";
+
+		PreparedStatement query = Banco.getPreparedStatementWithPk(conexao, sql);
+			
+		//executar o INSERT
+		try {
+			query.setString(1, novaPessoa.getNome());
+			query.setString(2, novaPessoa.getDtNascimento());
+			query.setString(3, novaPessoa.getSexo());
+			query.setString(4, novaPessoa.getCpf());
+			query.setInt(5, novaPessoa.getTipo());
+			query.execute();
+			
+			//Preencher o id gerado no banco no objeto
+			ResultSet resultado = query.getGeneratedKeys();
+			if(resultado.next()) {
+				novaPessoa.setIdPessoa(resultado.getInt(1));
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Erro ao inserir PESSOA. "
+					+ "\nCausa: " + e.getMessage());
+		}finally {
+			//Fechar a conexão
+			Banco.closePreparedStatement(query);
+			Banco.closeConnection(conexao);
+		}
+		
+		
+		return novaPessoa;
+	}
 	
 	public PessoaVO consultarPorId(int id_pessoa) {
 		PessoaVO pessoaBuscada = null;

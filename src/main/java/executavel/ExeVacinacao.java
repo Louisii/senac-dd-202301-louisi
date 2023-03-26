@@ -13,6 +13,10 @@ public class ExeVacinacao {
 		
 		System.out.println(pessoaQueJaExiste);
 		
+		PessoaVO p1 = new PessoaVO("Louisi", "29-10-2003", "F", "06359913909", 2);
+		
+		System.out.println(dbaDePessoas.inserir(p1));
+		
 	}
 
 }
