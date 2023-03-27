@@ -46,6 +46,40 @@ public class PessoaDAO {
 		return novaPessoa;
 	}
 	
+	
+	
+public boolean atualizar(PessoaVO pessoaEditada) {
+		boolean atualizou = false;
+		Connection conexao = Banco.getConnection();
+		String sql =  " UPDATE PESSOA "
+				    + " SET NOME = ?, DT_NASCIMENTO = ?, SEXO = ? , CPF = ?, TIPO = ? "
+				    + " WHERE ID_PESSOA = ? ";
+
+		PreparedStatement query = Banco.getPreparedStatementWithPk(conexao, sql);
+			
+		//executar o INSERT
+		try {
+			query.setString(1, pessoaEditada.getNome());
+			query.setString(2, pessoaEditada.getDtNascimento());
+			query.setString(3, pessoaEditada.getSexo());
+			query.setString(4, pessoaEditada.getCpf());
+			query.setInt(5, pessoaEditada.getTipo());
+			query.setInt(6, pessoaEditada.getIdPessoa());
+			
+			int quantidadeLinhasAtualizadas = query.executeUpdate();
+			atualizou = quantidadeLinhasAtualizadas > 0;
+		} catch (SQLException excecao) {
+			System.out.println("Erro ao atualizar pessoa. "
+					+ "\n Causa: " + excecao.getMessage());
+		}finally {
+			Banco.closePreparedStatement(query);
+			Banco.closeConnection(conexao);
+		}
+		
+		return atualizou;
+	}
+	
+	
 	public PessoaVO consultarPorId(int id_pessoa) {
 		PessoaVO pessoaBuscada = null;
 		Connection conexao = Banco.getConnection();

@@ -69,7 +69,6 @@ public class VacinaDAO {
 				vacinaBuscada.setDtIniPesquisa(resultado.getString("DT_INICIO_PESQUISA"));
 				vacinaBuscada.setPesquisadorResponsavel(pesquisadorResponsavelBuscado.consultarPorId((resultado.getInt("ID_PESQUISADOR_RESPONSAVEL"))));
 				
-				
 			}
 			
 		}catch (Exception e) {
