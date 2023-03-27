@@ -48,7 +48,7 @@ public class PessoaDAO {
 	
 	
 	
-public boolean atualizar(PessoaVO pessoaEditada) {
+	public boolean atualizar(PessoaVO pessoaEditada) {
 		boolean atualizou = false;
 		Connection conexao = Banco.getConnection();
 		String sql =  " UPDATE PESSOA "
@@ -111,6 +111,29 @@ public boolean atualizar(PessoaVO pessoaEditada) {
 		}
 		
 		return pessoaBuscada;
+	}
+	
+	
+	public boolean excluir(int idPessoa) {
+		boolean excluiu = false;
+		
+		Connection conexao = Banco.getConnection();
+		String sql = " DELETE FROM VACINACAO.PESSOA "
+				   + " WHERE ID_PESSOA = ? ";
+		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
+		try {
+			query.setInt(1, idPessoa);
+			
+			int quantidadeLinhasAtualizadas = query.executeUpdate();
+			excluiu = quantidadeLinhasAtualizadas > 0;
+		} catch (SQLException excecao) {
+			System.out.println("Erro ao excluir pessoa. "
+					+ "\n Causa: " + excecao.getMessage());
+		}finally {
+			Banco.closePreparedStatement(query);
+			Banco.closeConnection(conexao);
+		}
+		return excluiu;
 	}
 	
 }

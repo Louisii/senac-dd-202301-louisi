@@ -12,7 +12,7 @@ public class ExeVacinacao {
 		PessoaDAO pessoaDao = new PessoaDAO();
 		PessoaVO pessoaQueJaExiste = pessoaDao.consultarPorId(1);
 		
-		System.out.println(pessoaQueJaExiste);
+		//System.out.println(pessoaQueJaExiste);
 		
 		PessoaVO p1 = new PessoaVO("Louisi", "29-10-2003", "F", "06359913909", 2);
 		p1 = pessoaDao.consultarPorId(1);
@@ -27,9 +27,15 @@ public class ExeVacinacao {
 		
 		//System.out.println(vacinaDao.consultarPorId(1)); 
 		
-		p1.setTipo(3);
-		System.out.println(pessoaDao.atualizar(p1));	
-		System.out.println(pessoaDao.consultarPorId(1));
+		//p1.setTipo(3);
+		//System.out.println(pessoaDao.atualizar(p1));	
+		//System.out.println(pessoaDao.consultarPorId(1));
+		PessoaVO p2 = new PessoaVO("Artur", "29-10-2002", "M", "06359913909", 2);
+		pessoaDao.inserir(p2);
+		p2 = pessoaDao.consultarPorId(2);
+		System.out.println(pessoaDao.consultarPorId(2));
+		System.out.println(pessoaDao.excluir(2));	
+		System.out.println(pessoaDao.consultarPorId(2));
 		
 	}
 
