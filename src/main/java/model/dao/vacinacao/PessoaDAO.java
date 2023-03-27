@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.dao.Banco;
+import model.vo.telefonia.Endereco;
 import model.vo.vacinacao.PessoaVO;
 
 public class PessoaDAO {
@@ -135,5 +138,38 @@ public class PessoaDAO {
 		}
 		return excluiu;
 	}
+	
+	
+	public List<PessoaVO> consultarTodos() {
+		List<PessoaVO> pessoas = new ArrayList<PessoaVO>();
+		Connection conexao = Banco.getConnection();
+		String sql =  " SELECT * FROM VACINACAO.PESSOA ";
+		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
+		
+		try {
+			ResultSet resultado = query.executeQuery();
+			while(resultado.next()) {
+				PessoaVO pessoaConsultada = converterDeResultSetParaEntidade(resultado);
+				pessoas.add(pessoaConsultada);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao buscar todos as pessoas" 
+								+ "\n Causa: " + e.getMessage());	
+		}
+		
+		return pessoas;
+	}
+	
+	private PessoaVO converterDeResultSetParaEntidade(ResultSet resultado) throws SQLException {
+		PessoaVO PessoaConsultada = new PessoaVO(); 
+		PessoaConsultada.setIdPessoa(resultado.getInt("ID_PESSOA"));
+		PessoaConsultada.setNome(resultado.getString("NOME"));
+		PessoaConsultada.setDtNascimento(resultado.getString("DT_NASCIMENTO"));
+		PessoaConsultada.setSexo(resultado.getString("SEXO"));
+		PessoaConsultada.setCpf(resultado.getString("CPF"));
+		PessoaConsultada.setTipo(resultado.getInt("TIPO"));
+		return PessoaConsultada;
+	}
+	
 	
 }

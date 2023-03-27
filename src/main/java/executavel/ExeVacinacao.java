@@ -34,8 +34,10 @@ public class ExeVacinacao {
 		pessoaDao.inserir(p2);
 		p2 = pessoaDao.consultarPorId(2);
 		System.out.println(pessoaDao.consultarPorId(2));
-		System.out.println(pessoaDao.excluir(2));	
+		//System.out.println(pessoaDao.excluir(2));	
 		System.out.println(pessoaDao.consultarPorId(2));
+		
+		System.out.println(pessoaDao.consultarTodos());
 		
 	}
 
