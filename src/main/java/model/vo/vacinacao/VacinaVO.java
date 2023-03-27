@@ -7,15 +7,15 @@ public class VacinaVO {
 	private String origem;
 	private Integer estagio;
 	private String dtIniPesquisa;
-	private Integer idPesquisadorResponsavel;
+	private PessoaVO pesquisadorResponsavel;
 
-	public VacinaVO(String nome, String origem, Integer estagio, String dtIniPesquisa, Integer idPesquisadorResponsavel) {
+	public VacinaVO(String nome, String origem, Integer estagio, String dtIniPesquisa, PessoaVO pesquisadorResponsavel) {
 		super();
 		this.nome = nome;
 		this.origem = origem;
 		this.estagio = estagio;
 		this.dtIniPesquisa = dtIniPesquisa;
-		this.idPesquisadorResponsavel = idPesquisadorResponsavel;
+		this.pesquisadorResponsavel = pesquisadorResponsavel;
 	}
 
 	public VacinaVO() {
@@ -24,14 +24,14 @@ public class VacinaVO {
 	}
 
 	public VacinaVO(Integer idVacina,String nome, String origem, Integer estagio, String dtIniPesquisa,
-			Integer idPesquisadorResponsavel) {
+			PessoaVO pesquisadorResponsavel) {
 		super();
 		this.idVacina = idVacina;
 		this.nome = nome;
 		this.origem = origem;
 		this.estagio = estagio;
 		this.dtIniPesquisa = dtIniPesquisa;
-		this.idPesquisadorResponsavel = idPesquisadorResponsavel;
+		this.pesquisadorResponsavel = pesquisadorResponsavel;
 	}
 
 	public Integer getIdVacina() {
@@ -74,18 +74,18 @@ public class VacinaVO {
 		this.dtIniPesquisa = dtIniPesquisa;
 	}
 
-	public Integer getIdPesquisadorResponsavel() {
-		return idPesquisadorResponsavel;
+	public PessoaVO getPesquisadorResponsavel() {
+		return pesquisadorResponsavel;
 	}
 
-	public void setIdPesquisadorResponsavel(Integer idPesquisadorResponsavel) {
-		this.idPesquisadorResponsavel = idPesquisadorResponsavel;
+	public void setPesquisadorResponsavel(PessoaVO pesquisadorResponsavel) {
+		this.pesquisadorResponsavel = pesquisadorResponsavel;
 	}
 
 	@Override
 	public String toString() {
 		return "VacinaVO [idVacina= " + idVacina + ", nome= " + nome + ", origem= " + origem + ", estagio= " + estagio
-				+ ", dtIniPesquisa= " + dtIniPesquisa + ", idPesquisadorResponsavel= " + idPesquisadorResponsavel + "]";
+				+ ", dtIniPesquisa= " + dtIniPesquisa + ", pesquisadorResponsavel= " + pesquisadorResponsavel.getNome() + "]";
 	}
 	
 	

@@ -8,7 +8,6 @@ import model.vo.vacinacao.VacinaVO;
 public class ExeVacinacao {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		PessoaDAO dbaDePessoas = new PessoaDAO();
 		PessoaVO pessoaQueJaExiste = dbaDePessoas.consultarPorId(1);
@@ -21,7 +20,7 @@ public class ExeVacinacao {
 		
 		VacinaDAO vacinaDao = new VacinaDAO();
 		
-		VacinaVO v1 = new VacinaVO("covid", "Brasil", 2, "01-01-2020", 3 );
+		VacinaVO v1 = new VacinaVO("covid", "Brasil", 2, "01-01-2020", dbaDePessoas.consultarPorId(1) );
 		
 		//System.out.println(vacinaDao.inserir(v1));
 		

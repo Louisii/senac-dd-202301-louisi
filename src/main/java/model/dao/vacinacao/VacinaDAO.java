@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.dao.Banco;
+import model.vo.vacinacao.PessoaVO;
 import model.vo.vacinacao.VacinaVO;
 
 public class VacinaDAO {
@@ -24,7 +25,7 @@ public class VacinaDAO {
 			query.setString(2, novaVacina.getOrigem());
 			query.setInt(3, novaVacina.getEstagio());
 			query.setString(4, novaVacina.getDtIniPesquisa());
-			query.setInt(5, novaVacina.getIdPesquisadorResponsavel());
+			query.setInt(5, novaVacina.getPesquisadorResponsavel().getIdPessoa());
 			query.execute();
 			
 			//Preencher o id gerado no banco no objeto
@@ -49,6 +50,7 @@ public class VacinaDAO {
 	
 	public VacinaVO consultarPorId(int id_vacina) {
 		VacinaVO vacinaBuscada = null;
+		PessoaDAO pesquisadorResponsavelBuscado = new PessoaDAO();
 		Connection conexao = Banco.getConnection();
 		String sql = " select * from vacinacao.vacina "
 				   + " where id_vacina = ? ";
@@ -65,7 +67,8 @@ public class VacinaDAO {
 				vacinaBuscada.setOrigem(resultado.getString("PAIS_DE_ORIGEM"));
 				vacinaBuscada.setDtIniPesquisa(resultado.getString("ESTAGIO_DA_PESQUISA"));
 				vacinaBuscada.setDtIniPesquisa(resultado.getString("DT_INICIO_PESQUISA"));
-				vacinaBuscada.setIdPesquisadorResponsavel(resultado.getInt("ID_PESQUISADOR_RESPONSAVEL"));
+				vacinaBuscada.setPesquisadorResponsavel(pesquisadorResponsavelBuscado.consultarPorId((resultado.getInt("ID_PESQUISADOR_RESPONSAVEL"))));
+				
 				
 			}
 			
