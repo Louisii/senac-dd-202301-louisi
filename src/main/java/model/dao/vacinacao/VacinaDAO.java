@@ -47,6 +47,39 @@ public class VacinaDAO {
 	}
 	
 	
+	public boolean atualizar(VacinaVO vacinaEditada) {
+		boolean atualizou = false;
+		Connection conexao = Banco.getConnection();
+		String sql =  " UPDATE VACINACAO.VACINA "
+				    + " SET NOME = ?, PAIS_DE_ORIGEM = ?, ESTAGIO_DA_PESQUISA = ?, "
+				    + " DT_INICIO_PESQUISA = ?, ID_PESQUISADOR_RESPONSAVEL = ? "
+				    + " WHERE ID_VACINA = ? ";
+
+		PreparedStatement query = Banco.getPreparedStatementWithPk(conexao, sql);
+			
+		//executar o INSERT
+		try {
+			query.setString(1, vacinaEditada.getNome());
+			query.setString(2, vacinaEditada.getOrigem());
+			query.setInt(3, vacinaEditada.getEstagio());
+			query.setString(4, vacinaEditada.getDtIniPesquisa());
+			query.setInt(5, vacinaEditada.getPesquisadorResponsavel().getIdPessoa());
+			query.setInt(6, vacinaEditada.getIdVacina());
+			
+			int quantidadeLinhasAtualizadas = query.executeUpdate();
+			atualizou = quantidadeLinhasAtualizadas > 0;
+		} catch (SQLException excecao) {
+			System.out.println("Erro ao atualizar vacina. "
+					+ "\n Causa: " + excecao.getMessage());
+		}finally {
+			Banco.closePreparedStatement(query);
+			Banco.closeConnection(conexao);
+		}
+		
+		return atualizou;
+	}
+	
+	
 	public VacinaVO consultarPorId(int id_vacina) {
 		VacinaVO vacinaBuscada = null;
 		PessoaDAO pesquisadorResponsavelBuscado = new PessoaDAO();

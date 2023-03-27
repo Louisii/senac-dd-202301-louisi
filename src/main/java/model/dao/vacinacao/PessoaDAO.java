@@ -54,7 +54,7 @@ public class PessoaDAO {
 	public boolean atualizar(PessoaVO pessoaEditada) {
 		boolean atualizou = false;
 		Connection conexao = Banco.getConnection();
-		String sql =  " UPDATE PESSOA "
+		String sql =  " UPDATE VACINACAO.PESSOA "
 				    + " SET NOME = ?, DT_NASCIMENTO = ?, SEXO = ? , CPF = ?, TIPO = ? "
 				    + " WHERE ID_PESSOA = ? ";
 
