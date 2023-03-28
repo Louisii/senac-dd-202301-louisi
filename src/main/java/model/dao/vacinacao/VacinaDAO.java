@@ -4,11 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.dao.Banco;
-import model.vo.vacinacao.PessoaVO;
 import model.vo.vacinacao.VacinaVO;
 
 public class VacinaDAO {
@@ -26,7 +27,7 @@ public class VacinaDAO {
 			query.setString(1, novaVacina.getNome());
 			query.setString(2, novaVacina.getOrigem());
 			query.setInt(3, novaVacina.getEstagio());
-			query.setString(4, novaVacina.getDtIniPesquisa());
+			query.setString(4, novaVacina.getDtIniPesquisa().toString());
 			query.setInt(5, novaVacina.getPesquisadorResponsavel().getIdPessoa());
 			query.execute();
 			
@@ -65,7 +66,7 @@ public class VacinaDAO {
 			query.setString(1, vacinaEditada.getNome());
 			query.setString(2, vacinaEditada.getOrigem());
 			query.setInt(3, vacinaEditada.getEstagio());
-			query.setString(4, vacinaEditada.getDtIniPesquisa());
+			query.setString(4, vacinaEditada.getDtIniPesquisa().toString());
 			query.setInt(5, vacinaEditada.getPesquisadorResponsavel().getIdPessoa());
 			query.setInt(6, vacinaEditada.getIdVacina());
 			
@@ -100,8 +101,8 @@ public class VacinaDAO {
 				vacinaBuscada.setIdVacina(resultado.getInt("id_vacina"));
 				vacinaBuscada.setNome(resultado.getString("nome"));
 				vacinaBuscada.setOrigem(resultado.getString("PAIS_DE_ORIGEM"));
-				vacinaBuscada.setDtIniPesquisa(resultado.getString("ESTAGIO_DA_PESQUISA"));
-				vacinaBuscada.setDtIniPesquisa(resultado.getString("DT_INICIO_PESQUISA"));
+				vacinaBuscada.setEstagio(resultado.getInt("ESTAGIO_DA_PESQUISA"));
+				vacinaBuscada.setDtIniPesquisa(LocalDate.parse(resultado.getString("DT_INICIO_PESQUISA"),DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				vacinaBuscada.setPesquisadorResponsavel(pesquisadorResponsavelBuscado.consultarPorId((resultado.getInt("ID_PESQUISADOR_RESPONSAVEL"))));
 				
 			}
@@ -169,7 +170,7 @@ public class VacinaDAO {
 		vacinaConsultada.setNome(resultado.getString("NOME"));
 		vacinaConsultada.setOrigem(resultado.getString("PAIS_DE_ORIGEM"));
 		vacinaConsultada.setEstagio(resultado.getInt("ESTAGIO_DA_PESQUISA"));
-		vacinaConsultada.setDtIniPesquisa(resultado.getString("DT_INICIO_PESQUISA"));
+		vacinaConsultada.setDtIniPesquisa(LocalDate.parse(resultado.getString("DT_INICIO_PESQUISA"),DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		vacinaConsultada.setPesquisadorResponsavel(pesquisadorResponsavelBuscado.consultarPorId((resultado.getInt("ID_PESQUISADOR_RESPONSAVEL"))));
 		return vacinaConsultada;
 	}

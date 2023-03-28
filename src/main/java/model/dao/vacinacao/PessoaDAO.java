@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +22,11 @@ public class PessoaDAO {
 				    + " VALUES (?,?,?,?,?) ";
 
 		PreparedStatement query = Banco.getPreparedStatementWithPk(conexao, sql);
-			
+		
 		//executar o INSERT
 		try {
 			query.setString(1, novaPessoa.getNome());
-			query.setString(2, novaPessoa.getDtNascimento());
+			query.setString(2, novaPessoa.getDtNascimento().toString());
 			query.setString(3, novaPessoa.getSexo());
 			query.setString(4, novaPessoa.getCpf());
 			query.setInt(5, novaPessoa.getTipo());
@@ -50,7 +52,6 @@ public class PessoaDAO {
 	}
 	
 	
-	
 	public boolean atualizar(PessoaVO pessoaEditada) {
 		boolean atualizou = false;
 		Connection conexao = Banco.getConnection();
@@ -63,7 +64,7 @@ public class PessoaDAO {
 		//executar o INSERT
 		try {
 			query.setString(1, pessoaEditada.getNome());
-			query.setString(2, pessoaEditada.getDtNascimento());
+			query.setString(2, pessoaEditada.getDtNascimento().toString());
 			query.setString(3, pessoaEditada.getSexo());
 			query.setString(4, pessoaEditada.getCpf());
 			query.setInt(5, pessoaEditada.getTipo());
@@ -98,7 +99,7 @@ public class PessoaDAO {
 				pessoaBuscada = new PessoaVO();
 				pessoaBuscada.setIdPessoa(resultado.getInt("id_pessoa"));
 				pessoaBuscada.setNome(resultado.getString("nome"));
-				pessoaBuscada.setDtNascimento(resultado.getString("DT_NASCIMENTO"));
+				pessoaBuscada.setDtNascimento(LocalDate.parse(resultado.getString("DT_NASCIMENTO"),DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				pessoaBuscada.setSexo(resultado.getString("sexo"));
 				pessoaBuscada.setCpf(resultado.getString("cpf"));
 				pessoaBuscada.setTipo(resultado.getInt("tipo"));
@@ -164,7 +165,7 @@ public class PessoaDAO {
 		PessoaVO PessoaConsultada = new PessoaVO(); 
 		PessoaConsultada.setIdPessoa(resultado.getInt("ID_PESSOA"));
 		PessoaConsultada.setNome(resultado.getString("NOME"));
-		PessoaConsultada.setDtNascimento(resultado.getString("DT_NASCIMENTO"));
+		PessoaConsultada.setDtNascimento(LocalDate.parse(resultado.getString("DT_NASCIMENTO"),DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		PessoaConsultada.setSexo(resultado.getString("SEXO"));
 		PessoaConsultada.setCpf(resultado.getString("CPF"));
 		PessoaConsultada.setTipo(resultado.getInt("TIPO"));

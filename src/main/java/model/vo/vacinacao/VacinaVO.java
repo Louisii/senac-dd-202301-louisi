@@ -1,15 +1,17 @@
 package model.vo.vacinacao;
 
+import java.time.LocalDate;
+
 public class VacinaVO {
 	
 	private Integer idVacina;
 	private String nome;
 	private String origem;
 	private Integer estagio;
-	private String dtIniPesquisa;
+	private LocalDate dtIniPesquisa;
 	private PessoaVO pesquisadorResponsavel;
 
-	public VacinaVO(String nome, String origem, Integer estagio, String dtIniPesquisa, PessoaVO pesquisadorResponsavel) {
+	public VacinaVO(String nome, String origem, Integer estagio, LocalDate dtIniPesquisa, PessoaVO pesquisadorResponsavel) {
 		super();
 		this.nome = nome;
 		this.origem = origem;
@@ -23,7 +25,7 @@ public class VacinaVO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public VacinaVO(Integer idVacina,String nome, String origem, Integer estagio, String dtIniPesquisa,
+	public VacinaVO(Integer idVacina,String nome, String origem, Integer estagio, LocalDate dtIniPesquisa,
 			PessoaVO pesquisadorResponsavel) {
 		super();
 		this.idVacina = idVacina;
@@ -66,11 +68,11 @@ public class VacinaVO {
 		this.estagio = estagio;
 	}
 
-	public String getDtIniPesquisa() {
+	public LocalDate getDtIniPesquisa() {
 		return dtIniPesquisa;
 	}
 
-	public void setDtIniPesquisa(String dtIniPesquisa) {
+	public void setDtIniPesquisa(LocalDate dtIniPesquisa) {
 		this.dtIniPesquisa = dtIniPesquisa;
 	}
 
