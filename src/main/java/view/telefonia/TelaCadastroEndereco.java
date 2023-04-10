@@ -130,6 +130,7 @@ public class TelaCadastroEndereco {
 				Endereco endereco = new Endereco();
 				endereco.setCep(txtCep.getText());
 				endereco.setRua(txtRua.getText());
+				endereco.setBairro(txtBairro.getText());
 				endereco.setNumero(txtNumero.getText());
 				endereco.setCidade(txtCidade.getText());
 				endereco.setEstado((String) cbEstado.getSelectedItem());
@@ -137,6 +138,9 @@ public class TelaCadastroEndereco {
 				EnderecoController controller = new EnderecoController();
 				try {
 					controller.inserir(endereco);
+					JOptionPane.showMessageDialog(null, 
+							"Endereço cadastrado com sucesso", 
+							"Sucesso", JOptionPane.INFORMATION_MESSAGE);
 				} catch (CampoInvalidoException e) {
 					JOptionPane.showMessageDialog(null, 
 							"Preencha os seguintes campos: \n" + e.getMessage(), 

@@ -12,7 +12,7 @@ public class Banco {
 	
 	//private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; //MYSQL vers�o 8
 	private static final String DRIVER = "com.mysql.jdbc.Driver"; //MYSQL vers�o 5
-	private static final String BANCODADOS = "vacinacao";
+	private static final String BANCODADOS = "exemplos";
 	private static final String CONEXAO = "jdbc:mysql://localhost:3306/" 
 					+ BANCODADOS + "?useSSL=false&serverTimezone=UTC&useTimezone=true";
 	private static final String USER = "root";
@@ -25,7 +25,7 @@ public class Banco {
 			conn = DriverManager.getConnection(CONEXAO, USER, PASSWORD);
 			return conn;
 		} catch (ClassNotFoundException e) {
-			System.out.println("Classe do Driver n�o foi encontrada.");
+			System.out.println("Classe do Driver não foi encontrada.");
 			System.out.println("Erro: " + e.getMessage());
 			return null;
 		} catch (SQLException e) {
@@ -41,7 +41,7 @@ public class Banco {
 				conn.close();
 			}
 		} catch (SQLException e) {
-			System.out.println("Problema no fechamento da conex�o.");
+			System.out.println("Problema no fechamento da conexão.");
 			System.out.println("Erro: " + e.getMessage());
 		}	
 	}
