@@ -1,5 +1,6 @@
 package model.vo.vacinacao;
 
+import java.time.LocalDate;
 
 public class PessoaVO {
 	
@@ -10,12 +11,12 @@ public class PessoaVO {
 
 	private Integer idPessoa;
 	private String nome;
-	private String dtNascimento;
+	private LocalDate dtNascimento;
 	private String sexo;
 	private String cpf;
 	private Integer tipo;
 	
-	public PessoaVO(Integer idPessoa, String nome, String dtNascimento, String sexo, String cpf, Integer tipo) {
+	public PessoaVO(Integer idPessoa, String nome, LocalDate dtNascimento, String sexo, String cpf, Integer tipo) {
 		super();
 		this.idPessoa = idPessoa;
 		this.nome = nome;
@@ -25,7 +26,7 @@ public class PessoaVO {
 		this.tipo = tipo;
 	}
 	
-	public PessoaVO(String nome, String dtNascimento, String sexo, String cpf, Integer tipo) {
+	public PessoaVO(String nome, LocalDate dtNascimento, String sexo, String cpf, Integer tipo) {
 		super();
 		this.nome = nome;
 		this.dtNascimento = dtNascimento;
@@ -50,11 +51,11 @@ public class PessoaVO {
 		this.nome = nome;
 	}
 
-	public String getDtNascimento() {
+	public LocalDate getDtNascimento() {
 		return dtNascimento;
 	}
 
-	public void setDtNascimento(String dtNascimento) {
+	public void setDtNascimento(LocalDate dtNascimento) {
 		this.dtNascimento = dtNascimento;
 	}
 
