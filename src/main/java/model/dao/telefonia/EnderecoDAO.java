@@ -16,7 +16,7 @@ public class EnderecoDAO {
 	/**
 	 * Insere um novo endereco no banco
 	 * @param novoEndereco o endereco a ser persistido
-	 * @return o endereco inserido com a chave prim�ria gerada
+	 * @return o endereco inserido com a chave primária gerada
 	 */
 	public Endereco inserir(Endereco novoEndereco) {
 		//Conectar ao banco
@@ -44,10 +44,10 @@ public class EnderecoDAO {
 			}
 			
 		} catch (SQLException e) {
-			System.out.println("Erro ao inserir endere�o. "
+			System.out.println("Erro ao inserir endereço. "
 					+ "\nCausa: " + e.getMessage());
 		}finally {
-			//Fechar a conex�o
+			//Fechar a conexão
 			Banco.closePreparedStatement(query);
 			Banco.closeConnection(conexao);
 		}
@@ -75,7 +75,7 @@ public class EnderecoDAO {
 			int quantidadeLinhasAtualizadas = query.executeUpdate();
 			atualizou = quantidadeLinhasAtualizadas > 0;
 		} catch (SQLException excecao) {
-			System.out.println("Erro ao atualizar endere�o. "
+			System.out.println("Erro ao atualizar endereço. "
 					+ "\n Causa: " + excecao.getMessage());
 		}finally {
 			Banco.closePreparedStatement(query);
@@ -100,8 +100,11 @@ public class EnderecoDAO {
 				enderecoConsultado = converterDeResultSetParaEntidade(resultado);
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao buscar endere�o com id: + " + id 
+			System.out.println("Erro ao buscar endereço com id: + " + id 
 								+ "\n Causa: " + e.getMessage());	
+		}finally {
+			Banco.closePreparedStatement(query);
+			Banco.closeConnection(conexao);
 		}
 		
 		return enderecoConsultado;
@@ -120,7 +123,7 @@ public class EnderecoDAO {
 			int quantidadeLinhasAtualizadas = query.executeUpdate();
 			excluiu = quantidadeLinhasAtualizadas > 0;
 		} catch (SQLException excecao) {
-			System.out.println("Erro ao excluir endere�o. "
+			System.out.println("Erro ao excluir endereço. "
 					+ "\n Causa: " + excecao.getMessage());
 		}finally {
 			Banco.closePreparedStatement(query);
@@ -142,8 +145,11 @@ public class EnderecoDAO {
 				enderecos.add(enderecoConsultado);
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao buscar todos os endere�os" 
+			System.out.println("Erro ao buscar todos os endereços" 
 								+ "\n Causa: " + e.getMessage());	
+		} finally {
+			Banco.closePreparedStatement(query);
+			Banco.closeConnection(conexao);
 		}
 		
 		return enderecos;
@@ -160,5 +166,4 @@ public class EnderecoDAO {
 		enderecoConsultado.setEstado(resultado.getString("estado"));
 		return enderecoConsultado;
 	}
-			
 }
