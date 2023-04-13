@@ -4,10 +4,16 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import controller.telefonia.ClienteController;
 import controller.telefonia.EnderecoController;
+import model.exception.telefonia.CampoInvalidoException;
+import model.exception.telefonia.CpfJaUtilizadoException;
+import model.exception.telefonia.EnderecoInvalidoException;
+import model.vo.telefonia.Cliente;
 import model.vo.telefonia.Endereco;
 
 import javax.swing.JFormattedTextField;
@@ -86,6 +92,7 @@ public class TelaCadastroCliente {
 
 		try {
 			mascaraCpf = new MaskFormatter("###.###.###-##");
+			mascaraCpf.setValueContainsLiteralCharacters(false);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
@@ -113,6 +120,26 @@ public class TelaCadastroCliente {
 		btnSalvarCliente.setForeground(Color.BLACK);
 		btnSalvarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Cliente novoCliente = new Cliente();
+				novoCliente.setNome(txtNome.getText());
+				
+				try {
+					String cpfSemMascara = (String) mascaraCpf.stringToValue(txtCpf.getText());
+					novoCliente.setCpf(cpfSemMascara);
+				}catch (ParseException e2) {
+					JOptionPane.showMessageDialog(null,  "Erro ao converter o CPF", "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+				
+				
+				novoCliente.setEndereco((Endereco)cbEndereco.getSelectedItem());
+				
+				ClienteController controller =  new ClienteController();
+				try {
+					controller.inserir(novoCliente);
+					JOptionPane.showMessageDialog(null,  "Cliente salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+				} catch (CpfJaUtilizadoException | EnderecoInvalidoException | CampoInvalidoException e1) {
+					JOptionPane.showMessageDialog(null,  e1.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		btnSalvarCliente.setBounds(320, 127, 89, 23);
