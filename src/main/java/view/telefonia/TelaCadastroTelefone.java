@@ -61,6 +61,7 @@ public class TelaCadastroTelefone extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCadastroTelefone() {
+		setTitle("Cadastro Telefone");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 325, 218);
 		contentPane = new JPanel();
