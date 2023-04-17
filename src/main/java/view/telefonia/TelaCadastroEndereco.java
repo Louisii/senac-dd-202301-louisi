@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class TelaCadastroEndereco {
 
@@ -34,7 +35,7 @@ public class TelaCadastroEndereco {
 	private JComboBox cbEstado;
 	
 	//TODO chamar API ou backend futuramente
-	private String[] estados = {"Paraná", "Rio Grande do Sul", "Santa Catarina"};
+	private String[] estados = {"RS", "SC","PR", "SP", "RJ"};
 
 	/**
 	 * Launch the application.
@@ -64,67 +65,70 @@ public class TelaCadastroEndereco {
 	 */
 	private void initialize() {
 		frmCadastroDeEndereco = new JFrame();
+		frmCadastroDeEndereco.getContentPane().setBackground(Color.PINK);
+		frmCadastroDeEndereco.getContentPane().setForeground(Color.WHITE);
 		frmCadastroDeEndereco.setTitle("Cadastro de endereço");
-		frmCadastroDeEndereco.setBounds(100, 100, 380, 240);
+		frmCadastroDeEndereco.setBounds(100, 100, 447, 240);
 		frmCadastroDeEndereco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCadastroDeEndereco.getContentPane().setLayout(null);
 		
 		lblCep = new JLabel("CEP:");
-		lblCep.setBounds(15, 15, 45, 14);
+		lblCep.setBounds(15, 15, 64, 14);
 		frmCadastroDeEndereco.getContentPane().add(lblCep);
 		
 		txtCep = new JTextField();
-		txtCep.setBounds(60, 12, 300, 20);
+		txtCep.setBounds(89, 11, 300, 20);
 		frmCadastroDeEndereco.getContentPane().add(txtCep);
 		txtCep.setColumns(10);
 		
 		lblRua = new JLabel("Rua:");
-		lblRua.setBounds(15, 40, 45, 14);
+		lblRua.setBounds(15, 40, 64, 14);
 		frmCadastroDeEndereco.getContentPane().add(lblRua);
 		
 		lblBairro = new JLabel("Bairro:");
-		lblBairro.setBounds(15, 65, 45, 14);
+		lblBairro.setBounds(15, 65, 64, 14);
 		frmCadastroDeEndereco.getContentPane().add(lblBairro);
 		
 		lblCidade = new JLabel("Cidade:");
-		lblCidade.setBounds(15, 90, 45, 14);
+		lblCidade.setBounds(15, 90, 64, 14);
 		frmCadastroDeEndereco.getContentPane().add(lblCidade);
 		
 		lblNumero = new JLabel("Número:");
-		lblNumero.setBounds(15, 115, 45, 14);
+		lblNumero.setBounds(15, 115, 64, 14);
 		frmCadastroDeEndereco.getContentPane().add(lblNumero);
 		
 		lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(15, 140, 45, 14);
+		lblEstado.setBounds(15, 140, 64, 14);
 		frmCadastroDeEndereco.getContentPane().add(lblEstado);
 		
 		txtRua = new JTextField();
-		txtRua.setBounds(60, 37, 300, 20);
+		txtRua.setBounds(89, 36, 300, 20);
 		frmCadastroDeEndereco.getContentPane().add(txtRua);
 		txtRua.setColumns(10);
 		
 		txtBairro = new JTextField();
 		txtBairro.setColumns(10);
-		txtBairro.setBounds(60, 62, 300, 20);
+		txtBairro.setBounds(89, 61, 300, 20);
 		frmCadastroDeEndereco.getContentPane().add(txtBairro);
 		
 		txtCidade = new JTextField();
 		txtCidade.setColumns(10);
-		txtCidade.setBounds(60, 87, 300, 20);
+		txtCidade.setBounds(89, 86, 300, 20);
 		frmCadastroDeEndereco.getContentPane().add(txtCidade);
 		
 		txtNumero = new JTextField();
 		txtNumero.setColumns(10);
-		txtNumero.setBounds(60, 112, 300, 20);
+		txtNumero.setBounds(89, 111, 300, 20);
 		frmCadastroDeEndereco.getContentPane().add(txtNumero);
 		
 		cbEstado = new JComboBox(estados);
 		cbEstado.setToolTipText("Selecione");
 		cbEstado.setSelectedIndex(-1);
-		cbEstado.setBounds(60, 136, 300, 22);
+		cbEstado.setBounds(89, 136, 300, 22);
 		frmCadastroDeEndereco.getContentPane().add(cbEstado);
 		
 		btnSalvar = new JButton("Salvar");
+		btnSalvar.setBackground(new Color(153, 255, 153));
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Endereco endereco = new Endereco();
@@ -148,7 +152,7 @@ public class TelaCadastroEndereco {
 				}
 			}
 		});
-		btnSalvar.setBounds(130, 170, 100, 23);
+		btnSalvar.setBounds(289, 167, 100, 23);
 		frmCadastroDeEndereco.getContentPane().add(btnSalvar);
 		
 
