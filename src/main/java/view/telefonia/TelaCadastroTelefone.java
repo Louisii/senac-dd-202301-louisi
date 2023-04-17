@@ -28,6 +28,9 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import javax.swing.ButtonGroup;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 public class TelaCadastroTelefone extends JFrame {
 
@@ -36,9 +39,12 @@ public class TelaCadastroTelefone extends JFrame {
 	private JTextField txtNumero;
 	private JLabel lblDdd;
 	private JLabel lblNumero;
-	private JCheckBox chkMovel;
 	private JLabel lblDono;
 	private JComboBox cbCliente;
+	private JLabel lblTipo;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JRadioButton rdbtnMovel;
+	private JRadioButton rdbtnFixo;
 	
 
 	/**
@@ -63,7 +69,7 @@ public class TelaCadastroTelefone extends JFrame {
 	public TelaCadastroTelefone() {
 		setTitle("Cadastro Telefone");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 325, 218);
+		setBounds(100, 100, 325, 262);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.PINK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -91,16 +97,10 @@ public class TelaCadastroTelefone extends JFrame {
 		txtNumero.setBounds(89, 56, 172, 20);
 		contentPane.add(txtNumero);
 		
-		//MOVEL
-		chkMovel = new JCheckBox("Móvel");
-		chkMovel.setBackground(Color.PINK);
-		chkMovel.setBounds(26, 120, 97, 23);
-		contentPane.add(chkMovel);
-		
 		
 		//DONO
 		lblDono = new JLabel("Dono:");
-		lblDono.setBounds(26, 87, 56, 14);
+		lblDono.setBounds(26, 88, 56, 14);
 		contentPane.add(lblDono);
 		
 		ClienteController clienteController = new ClienteController();
@@ -109,6 +109,26 @@ public class TelaCadastroTelefone extends JFrame {
 		cbCliente = new JComboBox(todosOsClientes.toArray());
 		cbCliente.setBounds(89, 84, 172, 22);
 		contentPane.add(cbCliente);
+		
+		//TIPO
+		lblTipo = new JLabel("Tipo");
+		lblTipo.setBounds(26, 123, 46, 14);
+		contentPane.add(lblTipo);
+		
+		rdbtnMovel = new JRadioButton("Móvel");
+		rdbtnMovel.setActionCommand("Movel");
+		buttonGroup.add(rdbtnMovel);
+		rdbtnMovel.setBackground(Color.PINK);
+		rdbtnMovel.setBounds(89, 119, 78, 23);
+		contentPane.add(rdbtnMovel);
+		
+		rdbtnFixo = new JRadioButton("Fixo");
+		rdbtnFixo.setActionCommand("Fixo");
+		buttonGroup.add(rdbtnFixo);
+		rdbtnFixo.setBackground(Color.PINK);
+		rdbtnFixo.setBounds(183, 119, 78, 23);
+		contentPane.add(rdbtnFixo);
+		
 		
 		//SALVAR
 		JButton btnSalvarTelefone = new JButton("Salvar");
@@ -119,7 +139,7 @@ public class TelaCadastroTelefone extends JFrame {
 				novoTelefone.setNumero(txtNumero.getText());
 				novoTelefone.setIdCliente(((Cliente)cbCliente.getSelectedItem()).getId());
 				novoTelefone.setNumero(txtNumero.getText());
-				novoTelefone.setMovel(chkMovel.isSelected());
+				novoTelefone.setMovel(buttonGroup.getSelection().getActionCommand() == "Movel");
 				novoTelefone.setAtivo(false);
 				
 				TelefoneController controller =  new TelefoneController();
@@ -127,7 +147,9 @@ public class TelaCadastroTelefone extends JFrame {
 				JOptionPane.showMessageDialog(null,  "Telefone salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		btnSalvarTelefone.setBounds(172, 120, 89, 23);
+		btnSalvarTelefone.setBounds(172, 177, 89, 23);
 		contentPane.add(btnSalvarTelefone);
+		
 	}
+	
 }
