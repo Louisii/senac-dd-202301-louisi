@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import controller.telefonia.ClienteController;
 import controller.telefonia.EnderecoController;
@@ -45,6 +46,7 @@ public class TelaCadastroTelefone extends JFrame {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JRadioButton rdbtnMovel;
 	private JRadioButton rdbtnFixo;
+	
 	
 
 	/**
@@ -116,14 +118,12 @@ public class TelaCadastroTelefone extends JFrame {
 		contentPane.add(lblTipo);
 		
 		rdbtnMovel = new JRadioButton("Móvel");
-		rdbtnMovel.setActionCommand("Movel");
 		buttonGroup.add(rdbtnMovel);
 		rdbtnMovel.setBackground(Color.PINK);
 		rdbtnMovel.setBounds(89, 119, 78, 23);
 		contentPane.add(rdbtnMovel);
 		
 		rdbtnFixo = new JRadioButton("Fixo");
-		rdbtnFixo.setActionCommand("Fixo");
 		buttonGroup.add(rdbtnFixo);
 		rdbtnFixo.setBackground(Color.PINK);
 		rdbtnFixo.setBounds(183, 119, 78, 23);
@@ -139,12 +139,16 @@ public class TelaCadastroTelefone extends JFrame {
 				novoTelefone.setNumero(txtNumero.getText());
 				novoTelefone.setIdCliente(((Cliente)cbCliente.getSelectedItem()).getId());
 				novoTelefone.setNumero(txtNumero.getText());
-				novoTelefone.setMovel(buttonGroup.getSelection().getActionCommand() == "Movel");
-				novoTelefone.setAtivo(false);
+				novoTelefone.setMovel(rdbtnMovel.isSelected());
 				
 				TelefoneController controller =  new TelefoneController();
-				controller.inserir(novoTelefone);
-				JOptionPane.showMessageDialog(null,  "Telefone salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+				try {
+					controller.inserir(novoTelefone);
+					JOptionPane.showMessageDialog(null,  "Telefone salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+				} catch (CampoInvalidoException e1) {
+					JOptionPane.showMessageDialog(null,  e1.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+				
 			}
 		});
 		btnSalvarTelefone.setBounds(172, 177, 89, 23);
