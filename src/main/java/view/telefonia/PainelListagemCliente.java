@@ -1,7 +1,6 @@
 package view.telefonia;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -12,9 +11,9 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -26,9 +25,7 @@ import controller.telefonia.ClienteController;
 import model.exception.telefonia.ClienteComTelefoneException;
 import model.vo.telefonia.Cliente;
 
-public class TelaListagemClientes {
-
-	private JFrame frmListagemDeClientes;
+public class PainelListagemCliente extends JPanel {
 	private JTable tblClientes;
 	private ArrayList<Cliente> clientes;
 	private String[] nomesColunas = { "Nome", "CPF", "Endereço", "Total de Telefones", "Ativo?" };
@@ -51,7 +48,7 @@ public class TelaListagemClientes {
 	
 	private ClienteController controller = new ClienteController();
 	private Cliente clienteSelecionado;
-
+	
 	private void limparTabelaClientes() {
 		tblClientes.setModel(new DefaultTableModel(new Object[][] { nomesColunas, }, nomesColunas));
 	}
@@ -72,39 +69,9 @@ public class TelaListagemClientes {
 			model.addRow(novaLinhaDaTabela);
 		}
 	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaListagemClientes window = new TelaListagemClientes();
-					window.frmListagemDeClientes.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public TelaListagemClientes() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmListagemDeClientes = new JFrame();
-		frmListagemDeClientes.setTitle("Listagem de Clientes");
-		frmListagemDeClientes.setBounds(100, 100, 700, 600);
-		frmListagemDeClientes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmListagemDeClientes.getContentPane().setLayout(null);
+	
+	public PainelListagemCliente() {
+		this.setLayout(null);
 
 		btnBuscar = new JButton("Buscar (em construção...)");
 		btnBuscar.setBackground(new Color(255, 0, 255));
@@ -124,7 +91,7 @@ public class TelaListagemClientes {
 			}
 		});
 		btnBuscar.setBounds(285, 125, 200, 35);
-		frmListagemDeClientes.getContentPane().add(btnBuscar);
+		this.add(btnBuscar);
 
 		tblClientes = new JTable();
 		this.limparTabelaClientes(); // Adicionei essa linha
@@ -145,26 +112,26 @@ public class TelaListagemClientes {
 			}
 		});
 		tblClientes.setBounds(25, 164, 650, 328);
-		frmListagemDeClientes.getContentPane().add(tblClientes);
+		this.add(tblClientes);
 
 		lblNome = new JLabel("Nome:");
 		lblNome.setBounds(10, 25, 61, 16);
-		frmListagemDeClientes.getContentPane().add(lblNome);
+		this.add(lblNome);
 
 		txtNome = new JTextField();
 		txtNome.setBounds(160, 20, 240, 28);
-		frmListagemDeClientes.getContentPane().add(txtNome);
+		this.add(txtNome);
 		txtNome.setColumns(10);
 
 		lblCpf = new JLabel("CPF:");
 		lblCpf.setBounds(410, 25, 40, 16);
-		frmListagemDeClientes.getContentPane().add(lblCpf);
+		this.add(lblCpf);
 
 		try {
 			mascaraCpf = new MaskFormatter("###.###.###-##");
 			txtCPF = new JFormattedTextField(mascaraCpf);
 			txtCPF.setBounds(450, 19, 120, 28);
-			frmListagemDeClientes.getContentPane().add(txtCPF);
+			this.add(txtCPF);
 			txtCPF.setColumns(10);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
@@ -172,19 +139,19 @@ public class TelaListagemClientes {
 
 		lblDataNascimentoDe = new JLabel("Data de dascimento. De:");
 		lblDataNascimentoDe.setBounds(10, 60, 154, 10);
-		frmListagemDeClientes.getContentPane().add(lblDataNascimentoDe);
+		this.add(lblDataNascimentoDe);
 
 		dtNascimentoInicial = new DatePicker();
 		dtNascimentoInicial.setBounds(160, 55, 450, 30);
-		frmListagemDeClientes.getContentPane().add(dtNascimentoInicial);
+		this.add(dtNascimentoInicial);
 
 		lblAte = new JLabel("Até:");
 		lblAte.setBounds(10, 90, 175, 10);
-		frmListagemDeClientes.getContentPane().add(lblAte);
+		this.add(lblAte);
 
 		dtNascimentoFinal = new DatePicker();
 		dtNascimentoFinal.setBounds(160, 90, 450, 30);
-		frmListagemDeClientes.getContentPane().add(dtNascimentoFinal);
+		this.add(dtNascimentoFinal);
 
 		btnGerarPlanilha = new JButton("Gerar Planilha (Aula 12)");
 		btnGerarPlanilha.setEnabled(false);
@@ -202,21 +169,12 @@ public class TelaListagemClientes {
 			}
 		});
 		btnGerarPlanilha.setBounds(25, 500, 200, 45);
-		frmListagemDeClientes.getContentPane().add(btnGerarPlanilha);
+		this.add(btnGerarPlanilha);
 
 		btnEditar = new JButton("Editar");
-		btnEditar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// TODO exemplo de lógica para edição
-				int linhaSelecionadaNaTabela = tblClientes.getSelectedRow();
-				Cliente clienteSelecionado = clientes.get(linhaSelecionadaNaTabela - 1);
-
-				JOptionPane.showMessageDialog(null, "Chamar a tela de edição e passar o objeto clienteSelecionado...");
-			}
-		});
 		btnEditar.setBounds(250, 500, 200, 45);
 		btnEditar.setEnabled(false);
-		frmListagemDeClientes.getContentPane().add(btnEditar);
+		this.add(btnEditar);
 		
 		btnBuscarTodos = new JButton("Buscar todos");
 		btnBuscarTodos.addActionListener(new ActionListener() {
@@ -226,7 +184,7 @@ public class TelaListagemClientes {
 			}
 		});
 		btnBuscarTodos.setBounds(155, 125, 120, 35);
-		frmListagemDeClientes.getContentPane().add(btnBuscarTodos);
+		this.add(btnBuscarTodos);
 		
 		btnExcluir = new JButton("Excluir");
 		btnExcluir.setEnabled(false);
@@ -249,6 +207,15 @@ public class TelaListagemClientes {
 				}
 			}
 		});
-		frmListagemDeClientes.getContentPane().add(btnExcluir);
+		this.add(btnExcluir);
+	}
+	
+	//Torna o btnEditar acessível externamente à essa classe
+	public JButton getBtnEditar() {
+		return this.btnEditar;
+	}
+
+	public Cliente getClienteSelecionado() {
+		return clienteSelecionado;
 	}
 }
